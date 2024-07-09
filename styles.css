@@ -1,3 +1,7 @@
+h1 {
+  font-size: 30px;
+}
+
 body {
   font-family: Arial;
 }
@@ -7,7 +11,8 @@ p {
   margin-bottom: 0px;
 }
 
-.header,
+.input-header,
+.to-do-list-header,
 .to-do {
   display: grid;
 
@@ -15,8 +20,14 @@ p {
   gap: 10px;
 }
 
-.header {
+.input-header {
   grid-template-columns: 200px 150px 80px 100px;
+}
+
+.to-do-list-header {
+  grid-template-columns: 200px 150px;
+  margin-top: 20px;
+  font-weight: 600;
 }
 
 .to-do {
@@ -48,6 +59,15 @@ p {
   border-radius: 4px;
 
   cursor: pointer;
+
+  transition: box-shadow 0.3s;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover,
+.delete-button:hover,
+.delete-all-button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .add-button {
@@ -62,10 +82,6 @@ p {
   background-color: darkred;
 }
 
-.to-do-list {
-  margin-top: 40px;
-}
-
 .to-do {
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
