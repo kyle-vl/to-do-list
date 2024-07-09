@@ -40,11 +40,13 @@ function renderList() {
   toDoList.forEach((toDo) => {
     listHTML += `
       <div class="to-do">
-        <p>${toDo.name}</p>
-        <p>${toDo.date}</p>
-        <button class="delete-button js-delete-button">
-          Delete
-        </button>
+        <div>${toDo.name}</div>
+        <div>${toDo.date}</div>
+        <div>
+          <button class="delete-button js-delete-button">
+            Delete
+          </button>
+        </div>
       </div>
     `
   });

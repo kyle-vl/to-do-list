@@ -7,8 +7,10 @@ p {
   margin-bottom: 0px;
 }
 
-.header {
-  display: flex;
+.header,
+.to-do {
+  display: grid;
+  grid-template-columns: 200px 150px 80px;
   align-items: center;
   gap: 10px;
 }
@@ -26,12 +28,10 @@ p {
   font-size: 13px;
 }
 
-.add-button {
+.add-button,
+.delete-button {
   font-size: 15px;
   padding: 10px 16px;
-
-  color: white;
-  background-color: green;
 
   border: none;
   border-radius: 4px;
@@ -39,12 +39,16 @@ p {
   cursor: pointer;
 }
 
-.to-do-list {
-  margin-top: 40px;
+.add-button {
+  color: white;
+  background-color: green;
 }
 
-.to-do {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+.delete-button {
+  color: white;
+  background-color: red;
+}
+
+.to-do-list {
+  margin-top: 40px;
 }
