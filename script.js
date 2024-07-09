@@ -31,10 +31,23 @@ document.getElementById('js-delete-all-button')
 function addToList() {
   const date = dayjs(dateInputElement.value);
   const name = textInputElement.value;
+
+  // Check for empty names and invalid dates
+  if (!name.trim()) {
+    alert('Please enter a task name.');
+    return;
+  }
+
+  if (!date.isValid()) {
+    alert('Please enter a valid date.');
+    return;
+  }
+
   toDoList.push({ name, date });
 
   // Remove text from input box
   textInputElement.value = '';
+
   renderList();
 }
 
