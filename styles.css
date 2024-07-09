@@ -1,0 +1,35 @@
+body {
+  font-family: Arial;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.text-input,
+.date-input {
+  padding: 8px 16px 8px 4px;
+}
+
+.text-input {
+  font-size: 15px;
+}
+
+.date-input {
+  font-size: 13px;
+}
+
+.add-button {
+  font-size: 15px;
+  padding: 10px 16px;
+
+  color: white;
+  background-color: green;
+
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
