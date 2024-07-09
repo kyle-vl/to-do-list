@@ -2,6 +2,11 @@ body {
   font-family: Arial;
 }
 
+p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -32,4 +37,14 @@ body {
   border-radius: 4px;
 
   cursor: pointer;
+}
+
+.to-do-list {
+  margin-top: 40px;
+}
+
+.to-do {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
 }

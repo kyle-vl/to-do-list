@@ -2,6 +2,7 @@ let toDoList = [];
 
 // Selectors
 const textInputElement = document.getElementById('js-text-input');
+const dateInputElement = document.getElementById('js-date-input');
 const toDoListElement = document.getElementById('js-to-do-list');
 
 // Event Listeners
@@ -19,7 +20,10 @@ document.getElementById('js-text-input')
 
 // Functions
 function addToList() {
-  toDoList.push(textInputElement.value);
+  const date = dayjs(dateInputElement.value)
+    .format(`DD/MM/YY`);
+  const name = textInputElement.value
+  toDoList.push({ name, date });
 
   // Remove text from input box
   textInputElement.value = '';
@@ -27,12 +31,13 @@ function addToList() {
 }
 
 function renderList() {
-  listHTML = '';
+  let listHTML = '';
 
   toDoList.forEach((toDo) => {
     listHTML += `
-      <div>
-        <p>${toDo}</p>
+      <div class="to-do">
+        <p>${toDo.name}</p>
+        <p>${toDo.date}</p>
       </div>
     `
   });
