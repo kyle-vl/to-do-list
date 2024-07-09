@@ -1,9 +1,13 @@
-let toDoList = [];
-
 // Selectors
 const textInputElement = document.getElementById('js-text-input');
 const dateInputElement = document.getElementById('js-date-input');
 const toDoListElement = document.getElementById('js-to-do-list');
+
+// Retrieve list
+let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
+if (toDoList) {
+  renderList();
+}
 
 // Event Listeners
 document.getElementById('js-add-button')
@@ -54,4 +58,10 @@ function renderList() {
         renderList();
       });
     });
+
+  saveToStorage();
+}
+
+function saveToStorage() {
+  localStorage.setItem('toDoList', JSON.stringify(toDoList));
 }
