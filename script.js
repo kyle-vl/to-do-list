@@ -24,9 +24,9 @@ document.getElementById('js-text-input')
 
 // Functions
 function addToList() {
-  const date = dayjs(dateInputElement.value)
-    .format(`DD/MM/YY`);
+  const date = dayjs(dateInputElement.value);
   const name = textInputElement.value
+  console.log(date);
   toDoList.push({ name, date });
 
   // Remove text from input box
@@ -37,11 +37,14 @@ function addToList() {
 function renderList() {
   let listHTML = '';
 
+  sortList();
+
   toDoList.forEach((toDo) => {
+    const dateString = toDo.date.format('DD/MM/YY');
     listHTML += `
       <div class="to-do">
         <div>${toDo.name}</div>
-        <div>${toDo.date}</div>
+        <div>${dateString}</div>
         <div>
           <button class="delete-button js-delete-button">
             Delete
@@ -52,7 +55,6 @@ function renderList() {
   });
 
   toDoListElement.innerHTML = listHTML;
-
   document.querySelectorAll('.js-delete-button')
     .forEach((deleteButton, index) => {
       deleteButton.addEventListener('click', () => {
@@ -62,6 +64,16 @@ function renderList() {
     });
 
   saveToStorage();
+}
+
+function sortList() {
+  toDoList.forEach((toDo) => {
+    if (typeof toDo.date === 'string') {
+      toDo.date = dayjs(toDo.date);
+    }
+  });
+
+  toDoList.sort((a, b) => a.date.diff(b.date));
 }
 
 function saveToStorage() {
