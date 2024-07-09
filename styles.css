@@ -10,9 +10,17 @@ p {
 .header,
 .to-do {
   display: grid;
-  grid-template-columns: 200px 150px 80px;
+
   align-items: center;
   gap: 10px;
+}
+
+.header {
+  grid-template-columns: 200px 150px 80px 100px;
+}
+
+.to-do {
+  grid-template-columns: 200px 150px 80px;
 }
 
 .text-input,
@@ -29,7 +37,10 @@ p {
 }
 
 .add-button,
-.delete-button {
+.delete-button,
+.delete-all-button {
+  color: white;
+
   font-size: 15px;
   padding: 10px 16px;
 
@@ -40,13 +51,15 @@ p {
 }
 
 .add-button {
-  color: white;
   background-color: green;
 }
 
 .delete-button {
-  color: white;
   background-color: red;
+}
+
+.delete-all-button {
+  background-color: darkred;
 }
 
 .to-do-list {

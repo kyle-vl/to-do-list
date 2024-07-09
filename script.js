@@ -22,11 +22,15 @@ document.getElementById('js-text-input')
     }
   })
 
+document.getElementById('js-delete-all-button')
+  .addEventListener('click', () => {
+    deleteAll();
+  });
+
 // Functions
 function addToList() {
   const date = dayjs(dateInputElement.value);
-  const name = textInputElement.value
-  console.log(date);
+  const name = textInputElement.value;
   toDoList.push({ name, date });
 
   // Remove text from input box
@@ -68,6 +72,7 @@ function renderList() {
 
 function sortList() {
   toDoList.forEach((toDo) => {
+    // Convert strings to dates (if retrived from localStorage)
     if (typeof toDo.date === 'string') {
       toDo.date = dayjs(toDo.date);
     }
@@ -78,4 +83,10 @@ function sortList() {
 
 function saveToStorage() {
   localStorage.setItem('toDoList', JSON.stringify(toDoList));
+}
+
+function deleteAll() {
+  toDoList = [];
+  toDoListElement.innerHTML = '';
+  localStorage.removeItem('toDoList');
 }
