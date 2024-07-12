@@ -59,7 +59,8 @@ function renderList() {
   toDoList.forEach((toDo) => {
     const dateString = toDo.date.format('DD/MM/YY');
     listHTML += `
-      <div class="to-do">
+      <li class="to-do">
+        <input type="checkbox" class="js-checkbox">
         <div>${toDo.name}</div>
         <div>${dateString}</div>
         <div>
@@ -67,11 +68,13 @@ function renderList() {
             Delete
           </button>
         </div>
-      </div>
+      </li>
     `
   });
 
   toDoListElement.innerHTML = listHTML;
+
+  // Add event listeners to delete button and checkboxes
   document.querySelectorAll('.js-delete-button')
     .forEach((deleteButton, index) => {
       deleteButton.addEventListener('click', () => {
@@ -79,6 +82,21 @@ function renderList() {
         renderList();
       });
     });
+
+  document.querySelectorAll('.js-checkbox')
+    .forEach((checkbox) => {
+      checkbox.addEventListener('change', () => {
+        const listItem = checkbox.closest('.to-do');
+        if (checkbox.checked) {
+          console.log('marked');
+          listItem.classList.add('completed');
+        } else {
+          console.log('unmarked');
+          listItem.classList.remove('completed');
+        }
+      });
+    });
+
 
   saveToStorage();
 }
