@@ -59,8 +59,9 @@ function renderList() {
   toDoList.forEach((toDo) => {
     const dateString = toDo.date.format('DD/MM/YY');
     listHTML += `
-      <li class="to-do">
-        <input type="checkbox" class="js-checkbox">
+      <li class="to-do ${toDo.completed ? 'completed' : ''}">
+        <input type="checkbox" class="js-checkbox"
+        ${toDo.completed ? 'checked' : ''}>
         <div>${toDo.name}</div>
         <div>${dateString}</div>
         <div>
@@ -84,16 +85,14 @@ function renderList() {
     });
 
   document.querySelectorAll('.js-checkbox')
-    .forEach((checkbox) => {
+    .forEach((checkbox, index) => {
       checkbox.addEventListener('change', () => {
+        toDoList[index].completed = checkbox.checked;
+
         const listItem = checkbox.closest('.to-do');
-        if (checkbox.checked) {
-          console.log('marked');
-          listItem.classList.add('completed');
-        } else {
-          console.log('unmarked');
-          listItem.classList.remove('completed');
-        }
+        listItem.classList.toggle('completed', checkbox.checked);
+
+        renderList();
       });
     });
 
@@ -109,7 +108,19 @@ function sortList() {
     }
   });
 
+  // Sort by due date
   toDoList.sort((a, b) => a.date.diff(b.date));
+
+  // Move completed items to bottom of list
+  toDoList.sort((a, b) => {
+    if (a.completed && !b.completed) {
+      return 1;
+    } else if (!a.completed && b.completed) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 }
 
 function saveToStorage() {
