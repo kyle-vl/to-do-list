@@ -4,9 +4,10 @@ const dateInputElement = document.getElementById('js-date-input');
 const toDoListElement = document.getElementById('js-to-do-list');
 
 // Retrieve list
+let filterType = 'all';
 let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 if (toDoList) {
-  renderList();
+  renderList(filterType);
 }
 
 // Event Listeners
@@ -26,6 +27,14 @@ document.getElementById('js-delete-all-button')
   .addEventListener('click', () => {
     deleteAll();
   });
+
+document.querySelectorAll('input[name="filter-type"]')
+  .forEach((radio) => {
+    radio.addEventListener('change', () => {
+      filterType = radio.value;
+      renderList(filterType);
+    })
+  })
 
 // Functions
 function addToList() {
@@ -48,15 +57,23 @@ function addToList() {
   // Remove text from input box
   textInputElement.value = '';
 
-  renderList();
+  renderList(filterType);
 }
 
-function renderList() {
+function renderList(filterType) {
   let listHTML = '';
+  let filteredList = [];
 
   sortList();
+  if (filterType === 'all') {
+    filteredList = toDoList;
+  } else if (filterType === 'completed') {
+    filteredList = toDoList.filter(task => task.completed);
+  } else if (filterType === 'uncompleted') {
+    filteredList = toDoList.filter(task => !task.completed);
+  }
 
-  toDoList.forEach((toDo) => {
+  filteredList.forEach((toDo) => {
     const dateString = toDo.date.format('DD/MM/YY');
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
@@ -80,7 +97,7 @@ function renderList() {
     .forEach((deleteButton, index) => {
       deleteButton.addEventListener('click', () => {
         toDoList.splice(index, 1);
-        renderList();
+        renderList(filterType);
       });
     });
 
@@ -92,7 +109,7 @@ function renderList() {
         const listItem = checkbox.closest('.to-do');
         listItem.classList.toggle('completed', checkbox.checked);
 
-        renderList();
+        renderList(filterType);
       });
     });
 

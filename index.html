@@ -8,7 +8,23 @@
 </head>
 
 <body>
-  <h1>To do list</h1>
+  <div>
+    <h1>To do list</h1>
+    <div class="radio-filters">
+      <label>
+        <input type="radio" name="filter-type" value="all" checked>
+        All
+      </label>
+      <label>
+        <input type="radio" name="filter-type" value="completed">
+        Completed
+      </label>
+      <label>
+        <input type="radio" name="filter-type" value="uncompleted">
+        Uncompleted
+      </label>
+    </div>
+  </div>
   <div class="input-header">
     <input class="text-input" id="js-text-input" placeholder="Enter a reminder...">
     <input type="date" class="date-input" id="js-date-input">

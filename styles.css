@@ -11,6 +11,11 @@ p {
   margin-bottom: 0px;
 }
 
+.radio-filters {
+  margin-bottom: 20px;
+  display: flex;
+}
+
 .input-header,
 .to-do-list-header,
 .to-do {
