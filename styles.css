@@ -67,6 +67,36 @@ p {
   font-size: 13px;
 }
 
+.add-button,
+.delete-all-button {
+  color: white;
+
+  font-size: 15px;
+  padding: 10px 16px;
+
+  border: none;
+  border-radius: 4px;
+
+  cursor: pointer;
+
+  transition: box-shadow 0.3s;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover,
+.delete-button:hover,
+.delete-all-button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.add-button {
+  background-color: green;
+}
+
+.delete-all-button {
+  background-color: darkred;
+}
+
 .to-do-list-header {
   grid-template-columns: 280px 150px;
   margin-top: 20px;
@@ -84,6 +114,7 @@ p {
 
   border-radius: 6px;
   border: 1px solid rgb(226, 226, 226);
+  margin-top: 10px;
 }
 
 .to-do-left {
@@ -104,24 +135,15 @@ p {
   cursor: pointer;
 }
 
-.due-date {
-  font-size: 15px;
+.task-name {
+  max-width: 300px;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
 }
 
-.add-button,
-.delete-all-button {
-  color: white;
-
+.due-date {
   font-size: 15px;
-  padding: 10px 16px;
-
-  border: none;
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  transition: box-shadow 0.3s;
-  transition: background-color 0.3s;
 }
 
 .delete-button-container {
@@ -143,25 +165,9 @@ p {
   cursor: pointer;
 }
 
-.add-button:hover,
-.delete-button:hover,
-.delete-all-button:hover {
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-
-.add-button {
-  background-color: green;
-}
-
-.delete-all-button {
-  background-color: darkred;
-}
-
-.to-do {
-  margin-top: 10px;
-}
-
 .completed {
   text-decoration: line-through;
-  color: gray
+  color: gray;
+
+  background-color: rgb(204, 204, 204);
 }

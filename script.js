@@ -80,7 +80,9 @@ function renderList(filterType) {
         <div class="to-do-left">
           <input type="checkbox" class="checkbox js-checkbox"
           ${toDo.completed ? 'checked' : ''}>
-          <div>${toDo.name}</div>
+          <div class="task-name">
+            ${toDo.name}
+          </div>
         </div>
         <div class="to-do-right">
           <div class="due-date">
