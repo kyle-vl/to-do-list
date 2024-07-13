@@ -51,8 +51,10 @@ p {
 }
 
 .filter-dropdown {
+  display: none;
   position: absolute;
   margin-left: 150px;
+  z-index: 1;
 
   font-size: 14px;
 

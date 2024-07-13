@@ -2,6 +2,10 @@
 const textInputElement = document.getElementById('js-text-input');
 const dateInputElement = document.getElementById('js-date-input');
 const toDoListElement = document.getElementById('js-to-do-list');
+const filterDropButtonElement =
+  document.getElementById('js-filter-drop-button');
+const filterDropdownElement =
+  document.getElementById('js-filter-dropdown');
 
 // Retrieve list
 let filterType = 'all';
@@ -31,10 +35,21 @@ document.getElementById('js-delete-all-button')
 document.querySelectorAll('.filter-option')
   .forEach((option) => {
     option.addEventListener('click', (event) => {
+      filterDropdownElement.style.display = 'none';
+
       filterType = event.currentTarget.getAttribute('filter-type');
       renderList(filterType);
     });
   });
+
+filterDropButtonElement.addEventListener('click', () => {
+  filterDropdownElement.style.display =
+    (filterDropdownElement.style.display === 'block') ? 'none' : 'block';
+});
+
+filterDropdownElement.addEventListener('mouseleave', function () {
+  filterDropdownElement.style.display = 'none';
+});
 
 // Functions
 function addToList() {
