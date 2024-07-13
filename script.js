@@ -77,14 +77,20 @@ function renderList(filterType) {
     const dateString = toDo.date.format('DD/MM/YY');
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
-        <input type="checkbox" class="js-checkbox"
-        ${toDo.completed ? 'checked' : ''}>
-        <div>${toDo.name}</div>
-        <div>${dateString}</div>
-        <div>
-          <button class="delete-button js-delete-button">
-            Delete
-          </button>
+        <div class="to-do-left">
+          <input type="checkbox" class="checkbox js-checkbox"
+          ${toDo.completed ? 'checked' : ''}>
+          <div>${toDo.name}</div>
+        </div>
+        <div class="to-do-right">
+          <div class="due-date">
+            ${dateString}
+          </div>
+          <div class="delete-button-container">
+            <button class="delete-button js-delete-button">
+              X
+            </button>
+          </div>
         </div>
       </li>
     `
