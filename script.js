@@ -28,13 +28,13 @@ document.getElementById('js-delete-all-button')
     deleteAll();
   });
 
-document.querySelectorAll('input[name="filter-type"]')
-  .forEach((radio) => {
-    radio.addEventListener('change', () => {
-      filterType = radio.value;
+document.querySelectorAll('.filter-option')
+  .forEach((option) => {
+    option.addEventListener('click', (event) => {
+      filterType = event.currentTarget.getAttribute('filter-type');
       renderList(filterType);
-    })
-  })
+    });
+  });
 
 // Functions
 function addToList() {

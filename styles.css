@@ -22,23 +22,52 @@ p {
   background-color: rgb(243, 243, 243);
 }
 
-.sidebar-header {
-  color: rgb(92, 92, 92);
+.sidebar-filter {
+  font-size: 14px;
+
   margin-top: 10px;
   margin-bottom: 20px;
 
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-.radio-filter {
-  color: rgb(92, 92, 92);
-  font-size: 10px;
-  margin-bottom: 10px;
+.filter-icon {
+  width: 20px;
+}
 
-  display: flex;
-  flex-direction: column;
-  text-align: center;
+.filter-drop-button {
+  border: none;
+  cursor: pointer;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  transition: background-color 0.3s;
+}
+
+.filter-drop-button:hover {
+  background-color: rgb(223, 221, 221);
+}
+
+.filter-dropdown {
+  position: absolute;
+  margin-left: 150px;
+
+  font-size: 14px;
+
+  background-color: rgb(223, 221, 221);
+
+  padding: 10px;
+}
+
+.filter-dropdown a {
+  display: block;
+  cursor: pointer;
+}
+
+.filter-dropdown a:hover {
+  background-color: rgb(189, 189, 189);
 }
 
 .input-header,

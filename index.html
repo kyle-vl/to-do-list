@@ -11,21 +11,23 @@
   <div>
     <h1>Your Tasks</h1>
     <div class="sidebar">
-      <div class="sidebar-header">
-        Filters
+      <div class="sidebar-filter">
+        <button class="filter-drop-button">
+          <img class="filter-icon" src="icons/filter-icon.png">
+          Filter
+        </button>
+        <div class="filter-dropdown">
+          <a class="filter-option" filter-type="all">
+            All
+          </a>
+          <a class="filter-option" filter-type="completed">
+            Completed
+          </a>
+          <a class="filter-option" filter-type="uncompleted">
+            Uncompleted
+          </a>
+        </div>
       </div>
-      <label class="radio-filter">
-        <input type="radio" name="filter-type" value="all" checked>
-        All
-      </label>
-      <label class="radio-filter">
-        <input type="radio" name="filter-type" value="completed">
-        Completed
-      </label>
-      <label class="radio-filter">
-        <input type="radio" name="filter-type" value="uncompleted">
-        Uncompleted
-      </label>
     </div>
   </div>
   <div class="input-header">
