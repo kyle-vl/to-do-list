@@ -5,7 +5,8 @@
 <head>
   <title>To Do List</title>
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="input-header.css">
+  <link rel="stylesheet" href="styles/input-header.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
 
   <!-- Retrieve font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,21 +18,35 @@
   <div>
     <h1>Your Tasks</h1>
     <div class="sidebar">
-      <div class="sidebar-filter">
-        <button class="filter-drop-button" id="js-filter-drop-button">
-          <img class="filter-icon" src="icons/filter-icon.png">
+      <div class="sidebar-container">
+        <button class="sidebar-drop-button" id="js-filter-drop-button">
+          <img class="sidebar-icon" src="icons/filter-icon.png">
           Filter
         </button>
-        <div class="filter-dropdown" id="js-filter-dropdown">
-          <a class="filter-option" filter-type="all">
+        <div class="sidebar-dropdown" id="js-filter-dropdown">
+          <a class="filter-option sidebar-option" filter-type="all">
             All
           </a>
-          <a class="filter-option" filter-type="completed">
+          <a class="filter-option sidebar-option" filter-type="completed">
             Completed
           </a>
-          <a class="filter-option" filter-type="uncompleted">
+          <a class="filter-option sidebar-option" filter-type="uncompleted">
             Uncompleted
           </a>
+        </div>
+        <div class="sidebar-container">
+          <button class="sidebar-drop-button" id="js-display-drop-button">
+            <img class="sidebar-icon" src="icons/clock-icon.png">
+            Time Display
+          </button>
+          <div class="sidebar-dropdown" id="js-display-dropdown">
+            <a class="display-option sidebar-option" display-type="12">
+              12 Hour
+            </a>
+            <a class="display-option sidebar-option" display-type="24">
+              24 Hour
+            </a>
+          </div>
         </div>
       </div>
     </div>

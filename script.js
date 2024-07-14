@@ -3,19 +3,20 @@ const textInputElement = document.getElementById('js-text-input');
 const dateInputElement = document.getElementById('js-date-input');
 const timeInputElement = document.getElementById('js-time-input');
 const toDoListElement = document.getElementById('js-to-do-list');
-const filterDropButtonElement =
-  document.getElementById('js-filter-drop-button');
 const filterDropdownElement =
   document.getElementById('js-filter-dropdown');
+const displayDropdownElement =
+  document.getElementById('js-display-dropdown');
 
 // Retrieve list
 let filterType = 'all';
+let displayType = '24';
 let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 if (toDoList) {
-  renderList(filterType);
+  renderList(filterType, displayType);
 }
 
-// Event Listeners
+// Input Header Event Listeners
 document.getElementById('js-add-button')
   .addEventListener('click', () => {
     addToList();
@@ -33,23 +34,48 @@ document.getElementById('js-delete-all-button')
     deleteAll();
   });
 
+// Sidebar Event Listeners
+
+// Filter options
 document.querySelectorAll('.filter-option')
   .forEach((option) => {
     option.addEventListener('click', (event) => {
       filterDropdownElement.style.display = 'none';
 
       filterType = event.currentTarget.getAttribute('filter-type');
-      renderList(filterType);
+      renderList(filterType, displayType);
     });
   });
 
-filterDropButtonElement.addEventListener('click', () => {
-  filterDropdownElement.style.display =
-    (filterDropdownElement.style.display === 'block') ? 'none' : 'block';
-});
+document.getElementById('js-filter-drop-button')
+  .addEventListener('click', () => {
+    filterDropdownElement.style.display =
+      (filterDropdownElement.style.display === 'block') ? 'none' : 'block';
+  });
 
 filterDropdownElement.addEventListener('mouseleave', function () {
   filterDropdownElement.style.display = 'none';
+});
+
+// Display options
+document.querySelectorAll('.display-option')
+  .forEach((option) => {
+    option.addEventListener('click', (event) => {
+      displayDropdownElement.style.display = 'none';
+
+      displayType = event.currentTarget.getAttribute('display-type');
+      renderList(filterType, displayType);
+    });
+  });
+
+document.getElementById('js-display-drop-button')
+  .addEventListener('click', () => {
+    displayDropdownElement.style.display =
+      (displayDropdownElement.style.display === 'block') ? 'none' : 'block';
+  });
+
+displayDropdownElement.addEventListener('mouseleave', function () {
+  displayDropdownElement.style.display = 'none';
 });
 
 // Functions
@@ -79,12 +105,13 @@ function addToList() {
   // Remove text from input box
   textInputElement.value = '';
 
-  renderList(filterType);
+  renderList(filterType, displayType);
 }
 
-function renderList(filterType) {
+function renderList(filterType, displayType) {
   let previousToDo = '';
   let previousDateString = '';
+  let timeString = '';
 
   let listHTML = '';
   let filteredList = [];
@@ -110,7 +137,12 @@ function renderList(filterType) {
       `
     }
 
-    const timeString = toDo.date.format('HH:mm');
+
+    if (displayType === '12') {
+      timeString = toDo.date.format('h:mm A');
+    } else {
+      timeString = toDo.date.format('HH:mm');
+    }
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
         <div class="to-do-left">
@@ -143,7 +175,7 @@ function renderList(filterType) {
     .forEach((deleteButton, index) => {
       deleteButton.addEventListener('click', () => {
         toDoList.splice(index, 1);
-        renderList(filterType);
+        renderList(filterType, displayType);
       });
     });
 
