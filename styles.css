@@ -82,7 +82,7 @@ p {
 }
 
 .input-header {
-  grid-template-columns: 200px 150px 80px 100px;
+  grid-template-columns: 200px 125px 125px 80px 100px;
 }
 
 .text-input,

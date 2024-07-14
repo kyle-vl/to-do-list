@@ -1,6 +1,7 @@
 // Selectors
 const textInputElement = document.getElementById('js-text-input');
 const dateInputElement = document.getElementById('js-date-input');
+const timeInputElement = document.getElementById('js-time-input');
 const toDoListElement = document.getElementById('js-to-do-list');
 const filterDropButtonElement =
   document.getElementById('js-filter-drop-button');
@@ -53,7 +54,13 @@ filterDropdownElement.addEventListener('mouseleave', function () {
 
 // Functions
 function addToList() {
-  const date = dayjs(dateInputElement.value);
+  const dateValue = dateInputElement.value;
+  const timeValue = timeInputElement.value;
+
+  // Append :00 at the end of timeValue to include seconds
+  const combinedDateTime = `${dateValue}T${timeValue}:00`
+
+  const date = dayjs(combinedDateTime);
   const name = textInputElement.value;
 
   // Check for empty names and invalid dates
@@ -89,7 +96,7 @@ function renderList(filterType) {
   }
 
   filteredList.forEach((toDo) => {
-    const dateString = toDo.date.format('DD/MM/YY');
+    const dateString = toDo.date.format('DD/MM/YY HH:mm:ss');
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
         <div class="to-do-left">

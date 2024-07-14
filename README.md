@@ -5,3 +5,4 @@ Current features:
 - Delete unwanted list items
 - Mark items as completed
 - Items are sorted automatically by due date and completion
+- Filter to-do items by uncompleted / completed
