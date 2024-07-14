@@ -1,9 +1,12 @@
+* {
+  font-family: Inter, Arial;
+}
+
 h1 {
   font-size: 30px;
 }
 
 body {
-  font-family: Arial;
   margin-left: 70px;
 }
 
@@ -78,6 +81,16 @@ p {
 
   align-items: center;
   gap: 10px;
+}
+
+.to-do-date {
+  display: inline-block;
+  font-size: 15px;
+
+  margin-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid rgb(226, 226, 226);
+  border-radius: 4px;
 }
 
 .input-header {

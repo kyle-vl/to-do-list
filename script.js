@@ -99,18 +99,18 @@ function renderList(filterType) {
   }
 
   filteredList.forEach((toDo, index) => {
-    const dateString = toDo.date.format('DD/MM/YY');
+    const dateString = toDo.date.format('dddd, MMMM D');
     if (index !== 0) {
-      previousDateString = previousToDo.date.format('DD/MM/YY');
+      previousDateString = previousToDo.date.format('dddd, MMMM D');
     }
 
     if (index === 0 || dateString !== previousDateString) {
       listHTML += `
-        <div class=to-do-date">${dateString}</div>
+        <div class="to-do-date">${dateString}</div>
       `
     }
 
-    const timeString = toDo.date.format('HH:mm:ss');
+    const timeString = toDo.date.format('HH:mm');
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
         <div class="to-do-left">
