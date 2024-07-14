@@ -10,7 +10,7 @@ const displayDropdownElement =
 
 // Retrieve list
 let filterType = 'all';
-let displayType = '24';
+let displayType = localStorage.getItem('displayType') || '24';
 let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 if (toDoList) {
   renderList(filterType, displayType);
@@ -64,6 +64,7 @@ document.querySelectorAll('.display-option')
       displayDropdownElement.style.display = 'none';
 
       displayType = event.currentTarget.getAttribute('display-type');
+      localStorage.setItem('displayType', displayType);
       renderList(filterType, displayType);
     });
   });
