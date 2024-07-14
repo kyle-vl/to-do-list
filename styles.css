@@ -73,7 +73,6 @@ p {
 }
 
 .input-header,
-.to-do-list-header,
 .to-do {
   display: grid;
 
@@ -128,12 +127,6 @@ p {
   background-color: darkred;
 }
 
-.to-do-list-header {
-  grid-template-columns: 280px 150px;
-  margin-top: 20px;
-  margin-left: 50px;
-  font-weight: 600;
-}
 
 .to-do {
   display: flex;
@@ -173,7 +166,7 @@ p {
   white-space: normal;
 }
 
-.due-date {
+.due-time {
   font-size: 15px;
 }
 

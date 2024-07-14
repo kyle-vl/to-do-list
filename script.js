@@ -83,6 +83,9 @@ function addToList() {
 }
 
 function renderList(filterType) {
+  let previousToDo = '';
+  let previousDateString = '';
+
   let listHTML = '';
   let filteredList = [];
 
@@ -95,8 +98,19 @@ function renderList(filterType) {
     filteredList = toDoList.filter(task => !task.completed);
   }
 
-  filteredList.forEach((toDo) => {
-    const dateString = toDo.date.format('DD/MM/YY HH:mm:ss');
+  filteredList.forEach((toDo, index) => {
+    const dateString = toDo.date.format('DD/MM/YY');
+    if (index !== 0) {
+      previousDateString = previousToDo.date.format('DD/MM/YY');
+    }
+
+    if (index === 0 || dateString !== previousDateString) {
+      listHTML += `
+        <div class=to-do-date">${dateString}</div>
+      `
+    }
+
+    const timeString = toDo.date.format('HH:mm:ss');
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
         <div class="to-do-left">
@@ -107,17 +121,19 @@ function renderList(filterType) {
           </div>
         </div>
         <div class="to-do-right">
-          <div class="due-date">
-            ${dateString}
-          </div>
-          <div class="delete-button-container">
-            <button class="delete-button js-delete-button">
-              X
-            </button>
-          </div>
-        </div>
-      </li>
+          <div class="due-time">
+            ${timeString}
+          </div >
+    <div class="delete-button-container">
+      <button class="delete-button js-delete-button">
+        X
+      </button>
+    </div>
+        </div >
+      </li >
     `
+
+    previousToDo = toDo;
   });
 
   toDoListElement.innerHTML = listHTML;
@@ -138,8 +154,6 @@ function renderList(filterType) {
 
         const listItem = checkbox.closest('.to-do');
         listItem.classList.toggle('completed', checkbox.checked);
-
-        renderList(filterType);
       });
     });
 
@@ -157,17 +171,6 @@ function sortList() {
 
   // Sort by due date
   toDoList.sort((a, b) => a.date.diff(b.date));
-
-  // Move completed items to bottom of list
-  toDoList.sort((a, b) => {
-    if (a.completed && !b.completed) {
-      return 1;
-    } else if (!a.completed && b.completed) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
 }
 
 function saveToStorage() {
