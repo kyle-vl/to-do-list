@@ -154,6 +154,8 @@ function renderList(filterType) {
 
         const listItem = checkbox.closest('.to-do');
         listItem.classList.toggle('completed', checkbox.checked);
+
+        saveToStorage();
       });
     });
 
