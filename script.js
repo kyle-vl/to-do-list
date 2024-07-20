@@ -18,7 +18,6 @@ if (toDoList) {
   renderList(filterType, displayType);
 }
 
-// Input Header Event Listeners
 document.getElementById('js-create-icon')
   .addEventListener('click', () => {
     renderInputHeader();
@@ -71,10 +70,13 @@ displayDropdownElement.addEventListener('mouseleave', function () {
 
 // Functions
 function renderInputHeader() {
-  // Remove create button
-  createHeaderElement.innerHTML = '';
+  // Change create header
+  createHeaderElement.innerHTML = `
+    <img class="create-icon" src="icons/close-icon.png" id="js-close-icon">
+    Hide Menu
+  `;
 
-  // Render input header on document
+  // Render input header
   inputHeaderElement.innerHTML = `
     <input class="text-input" id="js-text-input" placeholder="Enter task name...">
     <input type="date" class="date-input" id="js-date-input">
@@ -83,10 +85,15 @@ function renderInputHeader() {
     <button class="delete-all-button" id="js-delete-all-button">Delete All</button>
   `
 
-  // Add selectors and event listeners to inputs and buttons
+  // Add selectors and event listeners
   textInputElement = document.getElementById('js-text-input');
   dateInputElement = document.getElementById('js-date-input');
   timeInputElement = document.getElementById('js-time-input');
+
+  document.getElementById('js-close-icon')
+    .addEventListener('click', () => {
+      hideInputHeader();
+    });
 
   document.getElementById('js-add-button')
     .addEventListener('click', () => {
@@ -106,7 +113,22 @@ function renderInputHeader() {
     });
 }
 
+function hideInputHeader() {
+  // Change create header
+  createHeaderElement.innerHTML = `
+    <img class="create-icon" src="icons/plus-icon.png" id="js-create-icon">
+    Create New
+  `;
 
+  // Hide input header
+  inputHeaderElement.innerHTML = '';
+
+  // Add event listeners
+  document.getElementById('js-create-icon')
+    .addEventListener('click', () => {
+      renderInputHeader();
+    });
+}
 
 function addToList() {
   const dateValue = dateInputElement.value;
