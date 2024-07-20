@@ -1,8 +1,10 @@
 // Selectors
-const textInputElement = document.getElementById('js-text-input');
-const dateInputElement = document.getElementById('js-date-input');
-const timeInputElement = document.getElementById('js-time-input');
+let textInputElement;
+let dateInputElement;
+let timeInputElement;
 const toDoListElement = document.getElementById('js-to-do-list');
+const inputHeaderElement = document.getElementById('js-input-header');
+const createHeaderElement = document.getElementById('js-create-header');
 const filterDropdownElement =
   document.getElementById('js-filter-dropdown');
 const displayDropdownElement =
@@ -17,21 +19,9 @@ if (toDoList) {
 }
 
 // Input Header Event Listeners
-document.getElementById('js-add-button')
+document.getElementById('js-create-icon')
   .addEventListener('click', () => {
-    addToList();
-  });
-
-document.getElementById('js-text-input')
-  .addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      addToList();
-    }
-  })
-
-document.getElementById('js-delete-all-button')
-  .addEventListener('click', () => {
-    deleteAll();
+    renderInputHeader();
   });
 
 // Sidebar Event Listeners
@@ -80,6 +70,44 @@ displayDropdownElement.addEventListener('mouseleave', function () {
 });
 
 // Functions
+function renderInputHeader() {
+  // Remove create button
+  createHeaderElement.innerHTML = '';
+
+  // Render input header on document
+  inputHeaderElement.innerHTML = `
+    <input class="text-input" id="js-text-input" placeholder="Enter task name...">
+    <input type="date" class="date-input" id="js-date-input">
+    <input type="time" class="date-input" id="js-time-input">
+    <button class="add-button" id="js-add-button">Add</button>
+    <button class="delete-all-button" id="js-delete-all-button">Delete All</button>
+  `
+
+  // Add selectors and event listeners to inputs and buttons
+  textInputElement = document.getElementById('js-text-input');
+  dateInputElement = document.getElementById('js-date-input');
+  timeInputElement = document.getElementById('js-time-input');
+
+  document.getElementById('js-add-button')
+    .addEventListener('click', () => {
+      addToList();
+    });
+
+  document.getElementById('js-text-input')
+    .addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        addToList();
+      }
+    })
+
+  document.getElementById('js-delete-all-button')
+    .addEventListener('click', () => {
+      deleteAll();
+    });
+}
+
+
+
 function addToList() {
   const dateValue = dateInputElement.value;
   const timeValue = timeInputElement.value;
@@ -118,6 +146,8 @@ function renderList(filterType, displayType) {
   let filteredList = [];
 
   sortList();
+
+  // Filter toDoList by chosen filterType
   if (filterType === 'all') {
     filteredList = toDoList;
   } else if (filterType === 'completed') {
@@ -132,18 +162,25 @@ function renderList(filterType, displayType) {
       previousDateString = previousToDo.date.format('dddd, MMMM D');
     }
 
+    /* Check if the date is ahead of the previous date. 
+    * If so, add a new date header.
+    */
     if (index === 0 || dateString !== previousDateString) {
       listHTML += `
         <div class="to-do-date">${dateString}</div>
       `
     }
 
-
+    // Format the time of each to do item by the chosen displayType
     if (displayType === '12') {
+      // 12-hour display
       timeString = toDo.date.format('h:mm A');
     } else {
+      // 24-hour display
       timeString = toDo.date.format('HH:mm');
     }
+
+    // Add to do list item to list.
     listHTML += `
       <li class="to-do ${toDo.completed ? 'completed' : ''}">
         <div class="to-do-left">
@@ -191,7 +228,6 @@ function renderList(filterType, displayType) {
         saveToStorage();
       });
     });
-
 
   saveToStorage();
 }
